@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pragmonic — Growth Intelligence for an AI-Accelerated World</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,900&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --header-h:120px;
+  --blue:#E8622C;
+  --blue-dark:#C7481A;
+  --dark:#20262E;
+  --yellow:#E8622C;
+  --ink:#14171B;
+  --gray-70:#4A4A46;
+  --gray-50:#77756F;
+  --line:#DBD9D3;
+  --bg:#FFFFFF;
+  --bg-soft:#EDECE8;
+  --bg-tint:#F2F1ED;
+  --gutter:clamp(1rem, 5vw, 4rem);
+  --maxw:1240px;
+}
+
+/* ============ RESET / BASE (mobile-first) ============ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{max-width:100%;overflow-x:hidden}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{
+  font-family:'DM Sans',system-ui,-apple-system,sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  line-height:1.55;
+  font-size:1rem;
+  -webkit-font-smoothing:antialiased;
+}
+img,svg,video{max-width:100%;height:auto;display:block}
+a{color:inherit}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter)}
+.wrap-wide{max-width:1680px;margin-inline:auto;padding-inline:clamp(1rem,3.2vw,3.25rem)}
+.section{border-bottom:1px solid var(--line)}
+.section-inner{padding-block:clamp(2.5rem,7vw,5rem)}
+.eyebrow{display:inline-block;font-size:.75rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);border-bottom:2px solid var(--blue);padding-bottom:.4rem}
+.eyebrow-ondark{color:#fff}
+h1,h2,h3{line-height:1.12;letter-spacing:-0.015em}
+.min-w-0{min-width:0}
+
+/* Arrow link */
+.arrow-link{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-weight:700;font-size:.9375rem;text-decoration:none;color:var(--ink);
+  min-height:44px;
+}
+.arrow-link::after{content:"›";font-size:1.2em;color:var(--blue);transform:translateY(-1px)}
+.arrow-link:hover{text-decoration:underline}
+.arrow-link.blue{color:var(--blue)}
+
+/* Pill buttons */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  white-space:normal;text-align:center;line-height:1.35;
+  border-radius:999px;border:0;cursor:pointer;text-decoration:none;
+  font-family:inherit;font-weight:700;font-size:1rem;
+  padding:.9rem 2rem;min-height:48px;
+  width:100%;
+  transition:background .15s ease;
+}
+.btn-primary{background:var(--blue);color:#fff}
+.btn-primary:hover{background:var(--blue-dark)}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-dark:hover{background:#333}
+.btn-outline{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+.btn-outline:hover{background:var(--ink);color:#fff}
+.btn:focus-visible,.arrow-link:focus-visible,a:focus-visible,button:focus-visible,input:focus-visible{
+  outline:2px solid var(--blue);outline-offset:2px;
+}
+@media (min-width:640px){.btn{width:auto}}
+.risk-note{font-size:.875rem;color:var(--gray-50);margin-top:.75rem}
+
+/* ============ HEADER ============ */
+.topbar{
+  position:absolute;top:0;left:0;right:0;z-index:60;
+  background:transparent;border-bottom:0;
+}
+.topbar .nav-desktop a{color:#fff}
+.topbar .logo{color:#fff}
+.topbar .hamburger span{background:#fff}
+.topbar .topbar-cta-desktop{
+  background:transparent;color:#fff;border:1px solid rgba(255,255,255,.65);
+}
+.topbar .topbar-cta-desktop:hover{background:rgba(255,255,255,.14)}
+.mobile-menu{top:var(--header-h,118px)}
+.topbar-inner{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  min-height:var(--header-h,118px);
+}
+.logo{
+  display:inline-flex;align-items:center;gap:.6rem;min-height:44px;text-decoration:none;
+  font-weight:700;font-size:1.125rem;letter-spacing:-.01em;
+}
+.logo-mark{
+  width:32px;height:32px;border-radius:8px;background:var(--blue);
+  display:inline-flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:900;font-size:.95rem;letter-spacing:-.03em;flex:none;
+}
+.foot-brand .logo{color:var(--ink)}
+
+.nav-desktop{display:none}
+.nav-desktop a{
+  text-decoration:none;font-size:.9375rem;font-weight:500;
+  padding:.5rem .75rem;min-height:44px;display:inline-flex;align-items:center;
+}
+.nav-desktop a:hover{text-decoration:underline;text-underline-offset:4px}
+.topbar-cta-desktop{display:none}
+
+.hamburger{
+  display:inline-flex;flex-direction:column;justify-content:center;gap:5px;
+  width:44px;height:44px;background:none;border:0;cursor:pointer;align-items:center;
+}
+.hamburger span{display:block;width:22px;height:2px;background:var(--ink);transition:transform .2s ease,opacity .2s ease}
+.hamburger.is-open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hamburger.is-open span:nth-child(2){opacity:0}
+.hamburger.is-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+.mobile-menu{
+  position:fixed;inset:var(--header-h,118px) 0 0 0;background:#fff;z-index:55;
+  transform:translateX(100%);transition:transform .22s ease;
+  overflow-y:auto;padding:1.5rem var(--gutter) 3rem;
+  display:flex;flex-direction:column;gap:.25rem;
+}
+.mobile-menu.open{transform:translateX(0)}
+.mobile-menu a:not(.btn){
+  text-decoration:none;font-size:1.125rem;font-weight:500;
+  padding:.85rem 0;border-bottom:1px solid var(--line);min-height:44px;display:flex;align-items:center;
+}
+.mobile-menu .btn{margin-top:1.25rem}
+body.menu-locked{overflow:hidden}
+
+@media (min-width:1024px){
+  .hamburger,.mobile-menu{display:none}
+  .nav-desktop{display:flex;gap:.25rem}
+  .topbar-cta-desktop{display:inline-flex;padding:.6rem 1.4rem;min-height:44px;font-size:.9375rem}
+}
+
+/* ============ HERO — full-bleed, animated dark background ============ */
+.hero{
+  position:relative;overflow:hidden;border-bottom:0;
+  min-height:100vh;min-height:100svh;
+  display:flex;align-items:flex-end;
+  isolation:isolate;
+  background:#0d1420;
+}
+.hero-bg{position:absolute;inset:0;z-index:-2;background:#0d1420;overflow:hidden}
+.hero-photo{
+  position:absolute;inset:0;z-index:1;
+  background-size:cover;background-position:center;
+  opacity:1;mix-blend-mode:normal;
+}
+.hero-glow{
+  position:absolute;border-radius:50%;filter:blur(80px);
+  will-change:transform,opacity;
+}
+.hero-glow-1{
+  width:60vmax;height:60vmax;left:-15vmax;top:-20vmax;
+  background:radial-gradient(circle,rgba(232,98,44,.55) 0%,rgba(232,98,44,0) 70%);
+  animation:glowDrift1 22s ease-in-out infinite;
+}
+.hero-glow-2{
+  width:55vmax;height:55vmax;right:-18vmax;top:20vmax;
+  background:radial-gradient(circle,rgba(59,90,150,.55) 0%,rgba(59,90,150,0) 70%);
+  animation:glowDrift2 28s ease-in-out infinite;
+}
+.hero-glow-3{
+  width:45vmax;height:45vmax;left:20vmax;bottom:-15vmax;
+  background:radial-gradient(circle,rgba(199,72,26,.4) 0%,rgba(199,72,26,0) 70%);
+  animation:glowDrift3 34s ease-in-out infinite;
+}
+@keyframes glowDrift1{
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(6vw,4vh) scale(1.15)}
+}
+@keyframes glowDrift2{
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(-5vw,-3vh) scale(1.1)}
+}
+@keyframes glowDrift3{
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(-4vw,-4vh) scale(1.2)}
+}
+.hero-grain{
+  position:absolute;inset:0;pointer-events:none;opacity:.25;mix-blend-mode:overlay;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:44px 44px;
+}
+.hero-scrim{
+  position:absolute;inset:0;z-index:-1;
+  background:
+    linear-gradient(105deg,rgba(8,14,24,.86) 0%,rgba(8,14,24,.6) 45%,rgba(8,14,24,.35) 100%),
+    linear-gradient(to bottom,rgba(8,14,24,.35) 0%,rgba(8,14,24,.2) 40%,rgba(8,14,24,.7) 100%);
+}
+@media (prefers-reduced-motion:reduce){
+  .hero-glow{animation:none}
+}
+.hero-grid{
+  display:grid;grid-template-columns:1fr;width:100%;
+  padding-block:clamp(4rem,13vw,7rem) clamp(2.5rem,7vw,4.5rem);
+}
+.hero-inner{max-width:64rem;min-width:0;color:#fff}
+.hero-eyebrow{
+  display:inline-block;font-size:.75rem;font-weight:500;letter-spacing:.18em;
+  text-transform:uppercase;color:#fff;border-bottom:2px solid var(--blue);
+  padding-bottom:.4rem;margin-bottom:1.75rem;
+}
+.hero h1{
+  font-size:clamp(2.2rem,5vw,4.25rem);
+  font-weight:400;letter-spacing:-.025em;line-height:1.1;
+  color:#fff;max-width:22ch;text-wrap:balance;
+}
+.hero h2.hero-lead{
+  font-size:clamp(1.5rem,3vw,2.25rem);
+  font-weight:500;color:#fff;margin-top:1.75rem;
+  max-width:26ch;letter-spacing:-.015em;line-height:1.2;
+}
+.hero-sub{
+  font-size:clamp(1rem,1.5vw,1.15rem);font-weight:400;
+  color:rgba(255,255,255,.82);max-width:52ch;margin-top:1.25rem;
+}
+.hero-cred{
+  font-size:.9375rem;color:rgba(255,255,255,.7);margin-top:1.5rem;
+  letter-spacing:.02em;
+}
+.hero-cta{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:flex-start;margin-top:2.25rem}
+.btn-hero{background:#fff;color:var(--ink);padding:.95rem 2.25rem;font-weight:500}
+.btn-hero:hover{background:rgba(255,255,255,.88)}
+.btn-hero-outline{
+  background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55);
+  padding:.95rem 2.25rem;font-weight:500;
+}
+.btn-hero-outline:hover{background:rgba(255,255,255,.12)}
+
+/* ============ CARD ROWS ============ */
+.row-head{display:grid;gap:.85rem;margin-bottom:2.25rem;justify-items:start}
+.row-head h2{font-size:clamp(2.1rem,4.6vw,3.4rem);font-weight:400;letter-spacing:-.02em;line-height:1.12;text-wrap:balance}
+.row-head .lede{color:var(--gray-70);max-width:62ch;font-size:1.0625rem}
+.card-grid{
+  display:grid;grid-template-columns:1fr;gap:0;
+  border-top:1px solid var(--line);
+}
+.card{
+  border-bottom:1px solid var(--line);
+  padding:1.5rem 0;
+  display:grid;gap:.6rem;align-content:start;min-width:0;
+}
+.card .card-tag{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-50)}
+.card-thumb{border-radius:10px;overflow:hidden;aspect-ratio:16/10;margin-bottom:1rem;background:var(--bg-soft);position:relative}
+.card-thumb svg{width:100%;height:100%;display:block}
+.card h3{font-size:1.35rem;font-weight:400;letter-spacing:-.01em}
+.card p{font-size:.9375rem;color:var(--gray-70)}
+.card .card-num{
+  font-size:2rem;font-weight:900;color:var(--blue);line-height:1;
+}
+@media (min-width:768px){
+  .card-grid{grid-template-columns:repeat(var(--cols,3),minmax(0,1fr));gap:0}
+  .card{border-bottom:0;border-top:0;padding:1.75rem 1.5rem;border-left:1px solid var(--line)}
+  .card:first-child{border-left:0;padding-left:0}
+  .card-grid{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+}
+
+/* Pedigree cards -- decorative SVG backdrops */
+.pedigree-mark{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--dark) 0%,#2c3540 100%);
+}
+.pedigree-mark svg{width:56%;height:56%;stroke:var(--blue);stroke-width:1.4;fill:none;opacity:.9}
+.pedigree-mark.alt{background:linear-gradient(135deg,#3a2517 0%,#5a3a24 100%)}
+.pedigree-mark.alt svg{stroke:#fff}
+.pedigree-mark.tint{background:linear-gradient(135deg,#f2f1ed 0%,#e5e3dc 100%)}
+.pedigree-mark.tint svg{stroke:var(--ink)}
+
+/* Section prose */
+.prose-cols{display:grid;gap:1.25rem;margin-top:2.25rem}
+.prose-cols p{color:var(--gray-70);max-width:64ch}
+.prose-cols p strong{color:var(--ink)}
+@media (min-width:1024px){.prose-cols{grid-template-columns:1fr 1fr;gap:3rem}}
+.soft-cta{margin-top:2rem;display:grid;gap:.35rem}
+.soft-cta span{font-size:.9375rem;color:var(--gray-50)}
+
+/* ============ PORTFOLIO OUTCOMES (stat cards) ============ */
+.portfolio{background:#fff}
+.portfolio-quote{font-size:clamp(1.05rem,2.1vw,1.5rem);font-weight:500;font-style:italic;color:var(--gray-70);max-width:52ch;margin-bottom:2.5rem}
+.portfolio-grid{display:grid;grid-template-columns:1fr;gap:1.25rem}
+.pcard{
+  background:var(--bg-soft);border-radius:14px;
+  padding:1.75rem;min-width:0;
+  display:flex;flex-direction:column;gap:1rem;
+}
+/* the metric sentence: readable headline, not giant display type */
+.pcard .pcard-num{
+  font-size:clamp(1.3rem,1.6vw,1.6rem);font-weight:500;letter-spacing:-.01em;
+  line-height:1.3;color:var(--ink);text-wrap:balance;margin:0;
+}
+/* only the figures get the big orange treatment, inline */
+.pcard .pcard-num strong{
+  color:var(--blue);font-weight:700;font-size:1.35em;
+  letter-spacing:-.02em;font-variant-numeric:tabular-nums;
+}
+.pcard .pcard-lbl{
+  font-size:.9375rem;color:var(--gray-70);
+  border-top:1px solid var(--line);padding-top:1rem;margin-top:auto;
+}
+.pcard .pcard-lbl b{color:var(--ink);font-weight:700}
+@media (min-width:768px){
+  .portfolio-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (min-width:1024px){
+  .portfolio-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
+  /* 5 cards across 6 columns: top row = three 2-wide cards, bottom row = two 3-wide cards */
+  .pcard{grid-column:span 2}
+  .pcard:nth-child(4),.pcard:nth-child(5){grid-column:span 3}
+}
+
+/* ============ FRICTION DIAGNOSTIC ============ */
+.friction .row-head h2{max-width:26ch}
+.friction-grid{display:grid;grid-template-columns:1fr;gap:1rem}
+.fcard{
+  background:var(--bg-soft);border-radius:14px;padding:1.75rem;min-width:0;
+  display:flex;flex-direction:column;gap:.9rem;
+}
+.fcard .f-icon{width:52px;height:52px}
+.fcard .f-icon svg{width:100%;height:100%;display:block}
+.f-wire{fill:none;stroke:var(--blue);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.fcard h3{font-size:1.35rem;font-weight:400;letter-spacing:-.01em}
+.fcard p{color:var(--gray-70);font-size:.9375rem}
+.friction-close{
+  margin-top:2.5rem;padding:1.75rem;
+  background:var(--dark);color:#fff;border-radius:14px;
+  font-size:clamp(1.05rem,2vw,1.35rem);font-weight:500;line-height:1.4;
+  text-wrap:balance;
+}
+.friction-close b{color:var(--blue);font-weight:700}
+@media (min-width:768px){
+  .friction-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem}
+  .fcard{padding:2rem}
+}
+@media (min-width:1024px){
+  .friction-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .friction-close{padding:2.5rem}
+}
+
+/* ============ METHOD (bento cards) ============ */
+.method{background:var(--bg-tint)}
+.method .row-head h2{max-width:20ch}
+.bento{
+  display:grid;grid-template-columns:1fr;gap:1rem;
+}
+.bcard{
+  background:#fff;border-radius:14px;padding:1.75rem;
+  display:flex;flex-direction:column;gap:0;min-width:0;
+  border:1px solid rgba(17,17,17,.05);
+}
+.bcard .b-icon{width:56px;height:56px;margin-bottom:1.25rem}
+.bcard .b-icon svg{width:100%;height:100%;display:block}
+.b-wire{fill:none;stroke:var(--blue);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.bcard h3{font-size:1.5rem;font-weight:400;letter-spacing:-.01em;margin-bottom:.6rem}
+.bcard p{color:var(--gray-70);font-size:.9875rem;max-width:44ch}
+.b-pill{
+  align-self:flex-start;margin-top:1.5rem;
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:48px;min-height:44px;padding:.55rem 1.5rem;
+  border:1px solid var(--ink);border-radius:999px;
+  font-weight:500;font-size:.9375rem;line-height:1;
+}
+.bcard .b-body{flex:1}
+.bcard.is-blue{background:var(--dark);border-color:transparent;color:#fff}
+.bcard.is-blue p{color:rgba(255,255,255,.88)}
+.bcard.is-blue .b-wire{stroke:#fff}
+.bcard.is-blue .b-pill{border-color:rgba(255,255,255,.6);color:#fff}
+.bcard.is-accent{background:var(--blue);border-color:transparent;color:#fff}
+.bcard.is-accent p{color:rgba(255,255,255,.92)}
+.bcard.is-accent .b-wire{stroke:#fff}
+.bcard.is-accent .b-pill{border-color:rgba(255,255,255,.75);color:#fff}
+.bcard.is-split{padding:0;overflow:hidden;display:grid;grid-template-columns:1fr;border:0}
+.bcard.is-split .b-body-wrap{padding:1.75rem;display:flex;flex-direction:column}
+.bcard.is-split .b-media{
+  position:relative;min-height:220px;
+  background:linear-gradient(135deg,var(--dark) 0%,#2c3540 55%,#3a2517 100%);
+  overflow:hidden;
+}
+.bcard.is-split .b-media::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 30% 30%,rgba(232,98,44,.4) 0%,transparent 45%),
+    radial-gradient(circle at 70% 70%,rgba(59,90,150,.35) 0%,transparent 50%);
+}
+.bcard.is-split .b-media svg{position:relative;z-index:1;width:60%;height:60%;margin:auto;display:block;stroke:#fff;fill:none;stroke-width:1.2;opacity:.85}
+.method-close{
+  margin-top:2rem;font-size:1.0625rem;color:var(--gray-70);max-width:64ch;
+}
+.method-close strong{color:var(--ink)}
+.bquote{
+  background:var(--dark);color:#fff;border-radius:14px;
+  padding:2rem 1.75rem;display:grid;grid-template-columns:1fr;gap:1.5rem;align-items:center;min-width:0;
+}
+.bquote p{font-size:clamp(1.15rem,2.4vw,1.6rem);font-weight:500;line-height:1.35;max-width:56ch;text-wrap:balance}
+.bquote .b-orbit{width:min(220px,68vw);justify-self:center}
+.bquote .b-orbit svg{width:100%;height:auto;display:block;overflow:visible}
+.orbit{transform-origin:110px 110px;animation:orbitSpin linear infinite}
+.orbit-1{animation-duration:26s}
+.orbit-2{animation-duration:19s;animation-direction:reverse}
+.orbit-3{animation-duration:33s}
+.orbit-4{animation-duration:13s;animation-direction:reverse}
+.orbit .node{fill:#fff;stroke:none}
+.orbit-2 .node,.orbit-4 .node{fill:rgba(255,255,255,.55)}
+@keyframes orbitSpin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.orbit{animation:none}}
+@media (min-width:768px){
+  .bento{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .b-span2{grid-column:span 2}
+  .b-span3{grid-column:span 3}
+  .bcard{min-height:340px}
+  .bcard.is-split{grid-template-columns:1fr 1fr}
+  .bcard.is-split .b-media{min-height:100%}
+  .bquote{grid-template-columns:minmax(0,2.6fr) minmax(0,.7fr);padding:2.5rem;gap:2.5rem}
+  .bquote .b-orbit{justify-self:end}
+}
+@media (min-width:1024px){
+  .bento{gap:1.25rem}
+  .bcard{padding:2rem;min-height:360px}
+  .bcard.is-split .b-body-wrap{padding:2rem}
+}
+
+/* ============ CONTRAST PROTOCOL (comparison table) ============ */
+.contrast .row-head h2{max-width:24ch}
+.contrast-table{
+  display:grid;gap:0;border:1px solid var(--line);border-radius:0;
+  overflow:hidden;background:#fff;
+}
+.contrast-head{
+  display:none;
+  grid-template-columns:1fr 1fr 1fr;
+  background:var(--dark);color:#fff;
+  font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+}
+.contrast-head > div{padding:1.25rem 1.5rem;border-left:1px solid rgba(255,255,255,.15)}
+.contrast-head > div:first-child{border-left:0}
+.contrast-head > div:last-child{background:var(--blue)}
+.contrast-row{
+  display:grid;grid-template-columns:1fr;
+  border-top:1px solid var(--line);
+}
+.contrast-row:first-of-type{border-top:0}
+.contrast-cell{padding:1.5rem;min-width:0}
+.contrast-cell .clabel{
+  display:block;font-size:.6875rem;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--gray-50);margin-bottom:.5rem;
+}
+.contrast-cell.dim h4{font-size:1.15rem;font-weight:500;color:var(--ink);letter-spacing:-.01em;line-height:1.25}
+.contrast-cell.usual{background:var(--bg-tint);color:var(--gray-70);font-size:.9875rem}
+.contrast-cell.prag{background:#fff;color:var(--ink);font-size:.9875rem;font-weight:500;position:relative}
+.contrast-cell.prag::before{
+  content:"";position:absolute;left:0;top:1.5rem;bottom:1.5rem;width:3px;background:var(--blue);
+}
+.contrast-cell.prag{padding-left:1.75rem}
+@media (min-width:768px){
+  .contrast-head{display:grid}
+  .contrast-row{grid-template-columns:1fr 1fr 1fr}
+  .contrast-cell{border-left:1px solid var(--line);padding:1.75rem}
+  .contrast-cell:first-child{border-left:0}
+  .contrast-cell.prag::before{top:1.75rem;bottom:1.75rem}
+  .contrast-cell.prag{padding-left:2rem}
+  .contrast-cell .clabel{display:none}
+}
+
+/* ============ SERVICES (Executive Solutions Portfolio) ============ */
+.services .row-head h2{max-width:22ch}
+.svc-grid{display:grid;grid-template-columns:1fr;gap:1rem}
+.svc{
+  background:var(--bg-soft);border-radius:14px;min-width:0;
+  display:flex;flex-direction:column;position:relative;overflow:hidden;
+}
+.svc-thumb{aspect-ratio:16/10;background:linear-gradient(135deg,var(--dark) 0%,#2c3540 100%);overflow:hidden}
+.svc-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.svc-body{padding:1.75rem;display:flex;flex-direction:column;gap:1rem;flex:1}
+.svc-num{
+  font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--blue);
+}
+.svc h3{font-size:1.35rem;font-weight:500;letter-spacing:-.01em;line-height:1.2}
+.svc .svc-row{display:grid;gap:.35rem;padding-top:1rem;border-top:1px solid var(--line)}
+.svc .svc-row span{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-50)}
+.svc .svc-row p{font-size:.9375rem;color:var(--gray-70);margin:0}
+.svc .svc-row.outcome span{color:var(--blue)}
+@media (min-width:768px){
+  .svc-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:1.25rem}
+  .svc-body{padding:2rem}
+}
+
+/* ============ TESTIMONIALS SLIDER ============ */
+.tslider-section{position:relative;overflow:hidden;isolation:isolate;background:var(--dark)}
+.tslider-bg{
+  position:absolute;inset:0;z-index:-2;
+  background-size:cover;background-position:center;
+  background-color:#1a2028;
+}
+.tslider-scrim{position:absolute;inset:0;z-index:-1;background:linear-gradient(to bottom,rgba(15,19,26,.35) 0%,rgba(15,19,26,.45) 45%,rgba(15,19,26,.65) 100%)}
+.tslider-section .eyebrow{color:#fff;border-bottom-color:var(--blue)}
+.tslider-section .row-head h2{color:#fff;max-width:24ch}
+.tslider-section .row-head .lede{color:rgba(255,255,255,.75)}
+.tslider-viewport{overflow:hidden}
+.tslider-track{
+  display:flex;align-items:flex-start;
+  transition:transform .55s cubic-bezier(.33,1,.68,1);
+}
+.tslide{flex:0 0 100%;min-width:0;padding:1rem 0 0;color:#fff}
+.tslide-head{display:flex;align-items:center;gap:1rem;margin-bottom:1.75rem}
+.tavatar{
+  width:52px;height:52px;border-radius:50%;flex:none;
+  background:var(--blue);color:#fff;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:1rem;font-weight:700;letter-spacing:.02em;
+}
+.tslide figcaption{font-size:1rem;font-weight:500}
+.tslide figcaption span{
+  display:block;font-weight:400;color:rgba(255,255,255,.6);
+  font-size:.9375rem;margin-top:.2rem;
+}
+.tslide blockquote{
+  font-size:clamp(1.1rem,1.9vw,1.55rem);font-weight:400;letter-spacing:-.01em;
+  line-height:1.45;max-width:64ch;
+}
+.tslider-nav{
+  display:flex;align-items:center;gap:1.25rem;margin-top:2.5rem;
+}
+.tarrow{
+  width:48px;height:48px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;
+  font-size:1.1rem;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;
+  transition:background .15s ease,border-color .15s ease;
+}
+.tarrow:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.6)}
+.tdots{display:flex;gap:.5rem;flex-wrap:wrap}
+.tdot{
+  width:9px;height:9px;border-radius:50%;border:0;padding:0;cursor:pointer;
+  background:rgba(255,255,255,.3);transition:background .15s ease,transform .15s ease;
+}
+.tdot[aria-selected="true"]{background:var(--blue);transform:scale(1.25)}
+@media (prefers-reduced-motion:reduce){.tslider-track{transition:none}}
+
+/* ============ REVERSE INTERVIEW ============ */
+.reverse .row-head h2{max-width:22ch}
+.reverse-list{
+  display:grid;gap:0;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.rev-item{
+  display:grid;grid-template-columns:auto 1fr;gap:1.5rem;
+  padding:1.5rem 0;border-top:1px solid var(--line);
+  align-items:start;
+}
+.rev-item:first-child{border-top:0}
+.rev-num{
+  font-size:2rem;font-weight:900;color:var(--blue);line-height:1;
+  font-variant-numeric:tabular-nums;letter-spacing:-.02em;
+}
+.rev-q{
+  font-size:clamp(1.15rem,2vw,1.5rem);font-weight:400;letter-spacing:-.01em;
+  line-height:1.35;color:var(--ink);text-wrap:balance;max-width:44ch;
+}
+.reverse-close{
+  margin-top:2.5rem;display:grid;gap:.75rem;
+}
+.reverse-close p{color:var(--gray-70);max-width:64ch}
+.reverse-close p strong{color:var(--ink)}
+@media (min-width:768px){
+  .rev-item{gap:2.5rem;padding:2rem 0}
+}
+
+/* ============ FAQ ============ */
+.faq-cards{--cols:3}
+.faq-cards .card q{font-style:normal;quotes:"\201C" "\201D"}
+.faq-icon{width:44px;height:44px;margin-bottom:.35rem}
+.faq-icon svg{width:100%;height:100%;display:block}
+.faq-wire{fill:none;stroke:var(--blue);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.faq-cards .card-tag{
+  justify-self:start;align-self:start;width:fit-content;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:var(--blue);color:#fff;
+  border-radius:999px;padding:.4rem 1rem;
+  font-size:.6875rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  line-height:1;margin-bottom:.35rem;
+}
+
+/* ============ FOUNDER STORY ============ */
+.founder{background:var(--bg-tint)}
+.founder .about-head{display:grid;justify-items:center;text-align:center;gap:1rem;margin-bottom:3rem}
+.founder .about-head h2{
+  font-size:clamp(2.1rem,4.6vw,3.4rem);font-weight:400;
+  letter-spacing:-.02em;line-height:1.12;max-width:28ch;text-wrap:balance;
+}
+.founder .about-lede{color:var(--gray-70);font-size:1.0625rem;max-width:56ch}
+.founder-cols{display:grid;grid-template-columns:1fr;gap:2.5rem;align-items:start}
+.founder-portrait{
+  aspect-ratio:4/5;background:linear-gradient(135deg,var(--dark) 0%,#2c3540 100%);
+  border-radius:14px;overflow:hidden;position:relative;margin:0;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  color:#fff;
+}
+.founder-portrait img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;z-index:0;
+}
+.founder-portrait::after{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to top,rgba(8,14,24,.85) 0%,rgba(8,14,24,.35) 35%,rgba(8,14,24,0) 60%);
+}
+.founder-portrait > *{position:relative;z-index:2}
+.founder-initials{
+  font-size:clamp(4rem,10vw,6rem);font-weight:700;letter-spacing:-.04em;line-height:1;
+  color:#fff;
+}
+.founder-portrait-meta{display:grid;gap:.25rem;padding:1.75rem}
+.founder-portrait-meta strong{font-size:1.25rem;font-weight:600;letter-spacing:-.01em}
+.founder-portrait-meta span{font-size:.875rem;color:rgba(255,255,255,.8)}
+.story-body{display:grid;gap:1.1rem}
+.story-body p{color:var(--gray-70);font-size:.9875rem;max-width:66ch}
+.story-body p strong{color:var(--ink)}
+.story-pull{
+  font-size:1.15rem;font-weight:500;color:var(--ink);
+  border-left:4px solid var(--blue);padding:.5rem 0 .5rem 1.25rem;max-width:56ch;
+  font-style:italic;
+}
+.story-pull .attribution{
+  display:block;font-style:normal;font-size:.75rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--gray-50);
+  margin-top:.75rem;
+}
+@media (min-width:1024px){
+  .founder-cols{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:4rem}
+}
+
+/* ============ CLOSING ============ */
+.closing{
+  position:relative;overflow:hidden;isolation:isolate;
+  min-height:min(88vh,780px);
+  display:flex;align-items:center;
+}
+.closing-bg{
+  position:absolute;inset:0;z-index:-2;background:#0d1420;overflow:hidden;
+}
+.closing-photo{
+  position:absolute;inset:0;z-index:1;
+  background-size:cover;background-position:center;opacity:.5;
+}
+.closing-bg .hero-glow-1{
+  width:70vmax;height:70vmax;left:-20vmax;top:-15vmax;
+  background:radial-gradient(circle,rgba(232,98,44,.5) 0%,rgba(232,98,44,0) 65%);
+}
+.closing-bg .hero-glow-2{
+  width:55vmax;height:55vmax;right:-15vmax;bottom:-10vmax;
+  background:radial-gradient(circle,rgba(59,90,150,.45) 0%,rgba(59,90,150,0) 70%);
+}
+.closing-scrim{
+  position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(to bottom, rgba(8,14,24,.4) 0%, rgba(8,14,24,.25) 45%, rgba(8,14,24,.7) 100%);
+}
+.closing .section-inner{width:100%}
+.closing .eyebrow{color:#fff;border-bottom-color:var(--blue);margin-bottom:1.5rem}
+.closing h2{
+  font-size:clamp(2.2rem,5vw,4.25rem);
+  font-weight:400;letter-spacing:-.025em;line-height:1.1;
+  color:#fff;max-width:18ch;text-wrap:balance;
+}
+.closing p.closing-lede{
+  color:rgba(255,255,255,.92);max-width:54ch;margin-top:1.25rem;
+  font-size:clamp(1rem,1.5vw,1.125rem);
+}
+.closing-paths{
+  display:grid;grid-template-columns:1fr;gap:1.25rem;margin-top:2.5rem;
+}
+.cpath{
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);
+  border-radius:14px;padding:1.75rem;color:#fff;
+  display:flex;flex-direction:column;gap:1rem;
+  backdrop-filter:blur(8px);
+}
+.cpath h3{font-size:1.35rem;font-weight:500;letter-spacing:-.01em;color:#fff;line-height:1.25}
+.cpath p{color:rgba(255,255,255,.82);font-size:.9375rem;line-height:1.55}
+.cpath .btn{width:100%}
+.closing-tag{
+  margin-top:3rem;font-size:1.0625rem;font-style:italic;color:rgba(255,255,255,.85);
+  text-align:left;max-width:52ch;
+}
+@media (min-width:768px){
+  .closing-paths{grid-template-columns:1fr 1fr}
+  .cpath{padding:2rem}
+  .cpath .btn{width:auto;align-self:flex-start}
+}
+
+/* ============ FOOTER ============ */
+footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.1);color:#fff}
+.logo-img{height:102px;width:auto;display:block}
+.foot-brand .logo-img{height:126px}
+.foot-grid{
+  display:grid;grid-template-columns:1fr;gap:2rem;
+  padding-block:clamp(2.5rem,6vw,4rem);
+}
+.foot-col h4{font-size:.8125rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.85rem}
+.foot-col ul{list-style:none;display:grid;gap:.4rem}
+.foot-col a{font-size:.9375rem;text-decoration:none;color:rgba(255,255,255,.72);min-height:32px;display:inline-flex;align-items:center}
+.foot-col a:hover{text-decoration:underline;color:#fff}
+.foot-col p{font-size:.9375rem;color:rgba(255,255,255,.72)}
+.foot-brand{display:grid;gap:.9rem;align-content:start}
+.foot-brand .tagline{font-size:.9375rem;color:rgba(255,255,255,.5);font-style:italic;max-width:34ch}
+.foot-bottom{
+  border-top:1px solid rgba(255,255,255,.1);
+  padding-block:1.5rem;
+  display:flex;flex-direction:column;gap:.5rem;
+  font-size:.8125rem;color:rgba(255,255,255,.5);
+}
+.foot-bottom a{color:rgba(255,255,255,.5)}
+.foot-bottom a:hover{color:#fff}
+@media (min-width:768px){
+  .foot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (min-width:1024px){
+  .foot-grid{grid-template-columns:1.4fr repeat(3,minmax(0,1fr))}
+  .foot-bottom{flex-direction:row;justify-content:space-between;align-items:center}
+}
+
+/* ============ SMALL-SCREEN REFINEMENTS ============ */
+@media (max-width:600px){
+  .bcard{min-height:0}
+  .hero .btn-hero,.hero .btn-hero-outline,.closing .btn{width:100%}
+  .bcard.is-split .b-media{min-height:200px}
+  .tslide blockquote{font-size:1.15rem;line-height:1.5}
+  .rev-num{font-size:1.6rem}
+  .founder-portrait{aspect-ratio:1/1}
+}
+@media (max-width:380px){
+  .hero h1{font-size:2rem}
+  .hero h2.hero-lead{font-size:1.35rem}
+  .row-head h2,.founder .about-head h2,.closing h2{font-size:1.85rem}
+}
+
+/* ============ HOVER / MOTION SYSTEM ============ */
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+
+  /* soft lift for solid content cards */
+  .pcard,.fcard,.svc,.bcard:not(.is-split),.cpath,.rev-item{
+    transition:transform .3s cubic-bezier(.2,.7,.3,1), box-shadow .3s ease, background-color .3s ease;
+    will-change:transform;
+  }
+  .pcard:hover,.fcard:hover,.svc:hover,.cpath:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 40px -18px rgba(20,23,27,.35);
+  }
+  .bcard:not(.is-split):hover{
+    transform:translateY(-6px);
+    box-shadow:0 22px 46px -20px rgba(20,23,27,.45);
+  }
+
+  /* split & media cards: lift + image zoom */
+  .bcard.is-split,.card-thumb,.svc-thumb,.b-media,.founder-portrait{
+    transition:transform .3s cubic-bezier(.2,.7,.3,1), box-shadow .3s ease;
+  }
+  .bcard.is-split:hover,.founder-portrait:hover{
+    transform:translateY(-6px);
+    box-shadow:0 22px 46px -20px rgba(20,23,27,.45);
+  }
+  .card-thumb img,.svc-thumb img,.b-media img,.founder-portrait img{
+    transition:transform .5s cubic-bezier(.2,.7,.3,1);
+    will-change:transform;
+  }
+  .card:hover .card-thumb img,
+  .svc:hover .svc-thumb img,
+  .bcard.is-split:hover .b-media img,
+  .founder-portrait:hover img{
+    transform:scale(1.05);
+  }
+
+  /* icon nudge on card hover */
+  .fcard .f-icon,.bcard .b-icon,.faq-icon{
+    transition:transform .3s cubic-bezier(.2,.7,.3,1);
+  }
+  .fcard:hover .f-icon,
+  .bcard:not(.is-split):hover .b-icon{
+    transform:translateY(-3px) rotate(-4deg) scale(1.08);
+  }
+  .card:hover .faq-icon{transform:translateY(-3px) scale(1.08)}
+
+  /* number pop */
+  .rev-num,.pcard .pcard-num strong{transition:color .3s ease, transform .3s ease}
+  .rev-item:hover .rev-num{transform:scale(1.12)}
+  .pcard:hover .pcard-num strong{transform:translateY(-1px)}
+
+  /* comparison table cells */
+  .contrast-cell.prag{transition:background-color .3s ease}
+  .contrast-row:hover .contrast-cell.prag{background:#fff6f2}
+
+  /* buttons: gentle press-ready lift */
+  .btn{transition:background .15s ease, transform .18s ease, box-shadow .25s ease}
+  .btn-primary:hover,.btn-dark:hover,.btn-hero:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 24px -12px rgba(232,98,44,.6);
+  }
+  .btn-outline:hover,.btn-hero-outline:hover{transform:translateY(-2px)}
+
+  /* arrow links */
+  .arrow-link::after{transition:transform .25s ease}
+  .arrow-link:hover::after{transform:translateX(4px)}
+
+  /* nav + logo */
+  .logo-img{transition:transform .3s cubic-bezier(.2,.7,.3,1)}
+  .logo:hover .logo-img{transform:scale(1.06)}
+
+  /* footer links */
+  .foot-col a{transition:color .2s ease, transform .2s ease}
+  .foot-col a:hover{transform:translateX(3px)}
+
+  /* pedigree/faq card hover tint */
+  .card{transition:background-color .3s ease}
+  .faq-cards .card:hover{background:var(--bg-tint)}
+}
+
+/* focus-visible parity so keyboard users get the lift too */
+.pcard:focus-within,.svc:focus-within,.cpath:focus-within{
+  box-shadow:0 18px 40px -18px rgba(20,23,27,.35);
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="topbar">
+  <div class="wrap-wide topbar-inner">
+    <a class="logo" href="#top">
+      <img class="logo-img" src="https://dashboard.katalyst-crm.com/files/t1/logojuli.png" alt="Pragmonic">
+    </a>
+    <nav class="nav-desktop" aria-label="Main">
+      <a href="#top">Home</a>
+      <a href="#method">The Method</a>
+      <a href="#services">Solutions</a>
+      <a href="#questions">Questions</a>
+      <a href="#founder">Founder</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-primary topbar-cta-desktop" href="#contact">Request a Briefing</a>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+    <a href="#top">Home</a>
+    <a href="#method">The Method</a>
+    <a href="#services">Solutions</a>
+    <a href="#questions">Questions</a>
+    <a href="#founder">Founder</a>
+    <a href="#contact">Contact</a>
+    <a class="btn btn-primary" href="#contact">Request a Briefing</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- ============ SECTION 1 | HERO ============ -->
+<section class="hero" id="hero">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-glow hero-glow-1"></div>
+    <div class="hero-glow hero-glow-2"></div>
+    <div class="hero-glow hero-glow-3"></div>
+    <div class="hero-photo" style="background-image:url('https://dashboard.katalyst-crm.com/files/t1/f2ecd005b4b3347b302d950ee83671a2.jpg')"></div>
+    <div class="hero-grain"></div>
+  </div>
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="wrap-wide hero-grid">
+    <div class="hero-inner">
+      <span class="hero-eyebrow">Pragmonic</span>
+      <h1>Growth Intelligence for an AI-Accelerated World</h1>
+      <h2 class="hero-lead">Your Competitors Aren't Winning With Better AI.</h2>
+      <p class="hero-sub">They're winning with better decisions. AI has extraordinary range, but it needs human judgment. Without a clear read on your business, it just gets you to the wrong answer faster.</p>
+      <p class="hero-cred">Juli Bark &nbsp;|&nbsp; APQC Process Certified &nbsp;|&nbsp; CMO &amp; CSO, Chief Outsiders</p>
+      <div class="hero-cta">
+        <a class="btn btn-hero" href="#contact">Request an Executive Diagnostic Briefing</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 2 | OPERATIONAL PEDIGREE STRIP ============ -->
+<section class="section" id="pedigree">
+  <div class="wrap section-inner">
+    <div class="row-head">
+      <span class="eyebrow">The Operational Pedigree Strip</span>
+      <h2>Credentials That Don't Need Adjectives</h2>
+      <p class="lede">Process rigor, commercial strategy, and executive experience, all built for mid-market complexity.</p>
+    </div>
+    <div class="card-grid" style="--cols:3">
+      <div class="card">
+        <div class="card-thumb">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260904_100932_b9623029-1c56-44bb-8519-58fc4482ad1c.png" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'">
+        </div>
+        <span class="card-tag">Certification</span>
+        <h3>APQC Process Manager Certified</h3>
+        <p>Formal training in workflow mapping and process design. The discipline and thinking needed for creating AI leverage.</p>
+      </div>
+      <div class="card">
+        <div class="card-thumb">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260904_100818_dd8baf54-1a76-4335-b783-644b5240111b.png" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'">
+        </div>
+        <span class="card-tag">Education</span>
+        <h3>Kellogg MBA, Northwestern University</h3>
+        <p>Marketing and Entrepreneurship. The commercial strategy foundation underneath every engagement.</p>
+      </div>
+      <div class="card">
+        <div class="card-thumb">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260904_100817_45899d34-6708-4748-a8ce-839827a072fd.png" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'">
+        </div>
+        <span class="card-tag">Executive Role</span>
+        <h3>CMO &amp; CSO, Chief Outsiders</h3>
+        <p>Backed by a cohort of enterprise-level fractional CMOs and CSOs.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 3 | PORTFOLIO OUTCOMES ============ -->
+<section class="section portfolio" id="portfolio">
+  <div class="wrap section-inner">
+    <div class="row-head">
+      <span class="eyebrow">The Portfolio Outcomes</span>
+      <h2>The Numbers Behind the Judgment Calls</h2>
+      <p class="lede">Real businesses. Complex markets. Every figure below is tied to a specific decision, not a marketing claim.</p>
+    </div>
+    <div class="portfolio-grid">
+      <div class="pcard">
+        <div class="pcard-num"><strong>20%</strong> sustained annual growth. <strong>95%</strong> client retention.</div>
+        <div class="pcard-lbl"><b>Financial Services, $1.5B firm.</b> Built and scaled the North American marketing and commercial growth engine while integrating 20-plus acquisitions.</div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-num"><strong>15%</strong> annual growth.</div>
+        <div class="pcard-lbl"><b>Regenerative Medicine, $70M portfolio.</b> Built and deployed a five-year B2B and e-commerce growth strategy in a regulated, emerging market.</div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-num"><strong>200%</strong> web traffic. <strong>50%</strong> license growth. <strong>4X</strong> top-of-funnel demand.</div>
+        <div class="pcard-lbl"><b>SaaS, founder-led company.</b> Built a modern, full-funnel digital growth engine from the ground up.</div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-num"><strong>200%</strong> profitable growth in 3 months, driven by new e-commerce and brand repositioning.</div>
+        <div class="pcard-lbl"><b>Eye Care Product Portfolio.</b></div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-num"><strong>10X</strong> lead growth through realigned product strategy, rebranding, and demand generation.</div>
+        <div class="pcard-lbl"><b>Class II Medical Device / SaaS Platform.</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 4 | FRICTION DIAGNOSTIC ============ -->
+<section class="section friction" id="diagnostic">
+  <div class="wrap section-inner">
+    <div class="row-head">
+      <span class="eyebrow">The Friction Diagnostic</span>
+      <h2>You Don't Have an AI Problem. You Have a Clarity Problem Wearing an AI Costume.</h2>
+      <p class="lede">Four symptoms show up in almost every mid-market company before anyone names what's actually happening.</p>
+    </div>
+    <div class="friction-grid">
+      <article class="fcard">
+        <div class="f-icon" aria-hidden="true">
+          <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+            <g class="f-wire">
+              <rect x="6" y="10" width="16" height="12" rx="1.5"/>
+              <rect x="30" y="10" width="16" height="12" rx="1.5"/>
+              <rect x="6" y="30" width="16" height="12" rx="1.5"/>
+              <rect x="30" y="30" width="16" height="12" rx="1.5"/>
+              <line x1="14" y1="14" x2="18" y2="14"/>
+              <line x1="14" y1="18" x2="18" y2="18"/>
+              <line x1="38" y1="14" x2="42" y2="14"/>
+              <line x1="38" y1="34" x2="42" y2="34"/>
+            </g>
+          </svg>
+        </div>
+        <h3>The Knowledge Mess</h3>
+        <p>Institutional knowledge lives in a hundred different places: old decks, someone's inbox, a shared drive nobody fully understands. The company isn't short on information. It's short on interpretation.</p>
+      </article>
+      <article class="fcard">
+        <div class="f-icon" aria-hidden="true">
+          <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+            <g class="f-wire">
+              <path d="M8 26 L44 26"/>
+              <path d="M36 18 L44 26 L36 34"/>
+              <circle cx="14" cy="14" r="3"/>
+              <circle cx="22" cy="38" r="3"/>
+              <circle cx="30" cy="14" r="3"/>
+              <path d="M14 17 L14 23"/>
+              <path d="M22 35 L22 29"/>
+              <path d="M30 17 L30 23"/>
+            </g>
+          </svg>
+        </div>
+        <h3>Speeding Up the Pandemonium</h3>
+        <p>A new tool gets layered onto a workflow nobody has documented in years. The process was already broken. Now it's broken faster.</p>
+      </article>
+      <article class="fcard">
+        <div class="f-icon" aria-hidden="true">
+          <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+            <g class="f-wire">
+              <circle cx="26" cy="26" r="18"/>
+              <path d="M26 14 L26 26 L34 32"/>
+              <circle cx="26" cy="26" r="2" fill="#E8622C" stroke="none"/>
+              <line x1="26" y1="6" x2="26" y2="10"/>
+              <line x1="26" y1="42" x2="26" y2="46"/>
+              <line x1="6" y1="26" x2="10" y2="26"/>
+              <line x1="42" y1="26" x2="46" y2="26"/>
+            </g>
+          </svg>
+        </div>
+        <h3>The Activity Trap</h3>
+        <p>Market noise, competitor moves, and the next urgent fire keep taking the wheel. Low-value activity runs the day. High-value strategy waits its turn indefinitely.</p>
+      </article>
+      <article class="fcard">
+        <div class="f-icon" aria-hidden="true">
+          <svg viewBox="0 0 52 52" xmlns="http://www.w3.org/2000/svg">
+            <g class="f-wire">
+              <rect x="6" y="6" width="14" height="14" rx="1.5"/>
+              <rect x="32" y="6" width="14" height="14" rx="1.5"/>
+              <rect x="6" y="32" width="14" height="14" rx="1.5"/>
+              <rect x="32" y="32" width="14" height="14" rx="1.5"/>
+              <path d="M20 13 L32 13" stroke-dasharray="2 3"/>
+              <path d="M13 20 L13 32" stroke-dasharray="2 3"/>
+              <path d="M39 20 L39 32" stroke-dasharray="2 3"/>
+              <path d="M20 39 L32 39" stroke-dasharray="2 3"/>
+            </g>
+          </svg>
+        </div>
+        <h3>The Fragmented Fixes</h3>
+        <p>A meeting summarizer here, an email draft there, no thread connecting any of it to a business objective. Hours get spent. Nothing measurable comes back.</p>
+      </article>
+    </div>
+    <div class="friction-close">
+      Messy knowledge. Broken workflows. Competing priorities. Disconnected tools. <b>AI is a force multiplier. The question is what you're multiplying.</b>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 5 | THE PRAGMONIC METHOD™ ============ -->
+<section class="section method" id="method">
+  <div class="wrap section-inner">
+    <div class="row-head">
+      <span class="eyebrow">The Pragmonic Method™</span>
+      <h2>Skip a Step, Pay for It Later</h2>
+      <p class="lede">The Pragmonic Method™ runs in one direction. Reverse it, and you've just financed someone else's chaos.</p>
+    </div>
+
+    <div class="bento">
+
+      <!-- 1. Reality — blue split card with abstract art -->
+      <article class="bcard is-blue is-split b-span2">
+        <div class="b-body-wrap">
+          <div class="b-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <g class="b-wire">
+                <circle cx="32" cy="32" r="20"/>
+                <circle cx="32" cy="32" r="12"/>
+                <line x1="32" y1="8" x2="32" y2="16"/>
+                <line x1="32" y1="48" x2="32" y2="56"/>
+                <line x1="8" y1="32" x2="16" y2="32"/>
+                <line x1="48" y1="32" x2="56" y2="32"/>
+              </g>
+            </svg>
+          </div>
+          <div class="b-body">
+            <h3>Reality.</h3>
+            <p>Audit what's actually happening, not what the org chart says is happening.</p>
+          </div>
+          <span class="b-pill">1</span>
+        </div>
+        <div class="b-media">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260904_100817_9ce81ace-ac16-4ce2-9634-ac8ae2a4e02c.png" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1" onerror="this.style.display='none'">
+        </div>
+      </article>
+
+      <!-- 2. Clarity -->
+      <article class="bcard">
+        <div class="b-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <g class="b-wire">
+              <circle cx="26" cy="26" r="16"/>
+              <line x1="38" y1="38" x2="54" y2="54"/>
+              <line x1="20" y1="26" x2="32" y2="26"/>
+              <line x1="26" y1="20" x2="26" y2="32"/>
+            </g>
+          </svg>
+        </div>
+        <div class="b-body">
+          <h3>Clarity.</h3>
+          <p>Isolate the root causes, the real bottlenecks, the decisions that matter.</p>
+        </div>
+        <span class="b-pill">2</span>
+      </article>
+
+      <!-- 3. Strategy -->
+      <article class="bcard">
+        <div class="b-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <g class="b-wire">
+              <line x1="8" y1="54" x2="56" y2="54"/>
+              <path d="M12 44 L24 32 L36 40 L54 14"/>
+              <circle cx="12" cy="44" r="3"/>
+              <circle cx="24" cy="32" r="3"/>
+              <circle cx="36" cy="40" r="3"/>
+              <circle cx="54" cy="14" r="3"/>
+              <path d="M48 14 L54 14 L54 20"/>
+            </g>
+          </svg>
+        </div>
+        <div class="b-body">
+          <h3>Strategy.</h3>
+          <p>Build a roadmap around outcomes and where the investment should go.</p>
+        </div>
+        <span class="b-pill">3</span>
+      </article>
+
+      <!-- 4. Alignment -->
+      <article class="bcard">
+        <div class="b-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <g class="b-wire">
+              <circle cx="16" cy="20" r="6"/>
+              <circle cx="32" cy="20" r="6"/>
+              <circle cx="48" cy="20" r="6"/>
+              <path d="M10 40 C10 34, 22 34, 22 40"/>
+              <path d="M26 40 C26 34, 38 34, 38 40"/>
+              <path d="M42 40 C42 34, 54 34, 54 40"/>
+              <line x1="10" y1="50" x2="54" y2="50"/>
+              <path d="M46 46 L54 50 L46 54"/>
+            </g>
+          </svg>
+        </div>
+        <div class="b-body">
+          <h3>Alignment.</h3>
+          <p>Get sales, marketing, and operations pulling toward the same target.</p>
+        </div>
+        <span class="b-pill">4</span>
+      </article>
+
+      <!-- 5. Execution -->
+      <article class="bcard">
+        <div class="b-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <g class="b-wire">
+              <rect x="8" y="12" width="48" height="40" rx="2"/>
+              <line x1="8" y1="22" x2="56" y2="22"/>
+              <line x1="16" y1="30" x2="32" y2="30"/>
+              <line x1="16" y1="38" x2="40" y2="38"/>
+              <line x1="16" y1="46" x2="28" y2="46"/>
+              <circle cx="46" cy="42" r="6"/>
+              <path d="M42 42 L45 45 L50 40"/>
+            </g>
+          </svg>
+        </div>
+        <div class="b-body">
+          <h3>Execution.</h3>
+          <p>Move the strategy into a weekly operating rhythm. Disciplined, not busy.</p>
+        </div>
+        <span class="b-pill">5</span>
+      </article>
+
+      <!-- 6. Technology -->
+      <article class="bcard">
+        <div class="b-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <g class="b-wire">
+              <rect x="10" y="14" width="44" height="30" rx="2"/>
+              <line x1="24" y1="50" x2="40" y2="50"/>
+              <line x1="20" y1="56" x2="44" y2="56"/>
+              <circle cx="18" cy="22" r="1.5" fill="#E8622C" stroke="none"/>
+              <line x1="24" y1="22" x2="46" y2="22"/>
+              <line x1="18" y1="30" x2="46" y2="30"/>
+              <line x1="18" y1="36" x2="38" y2="36"/>
+            </g>
+          </svg>
+        </div>
+        <div class="b-body">
+          <h3>Technology.</h3>
+          <p>Bring in automation and systems where they create verifiable value.</p>
+        </div>
+        <span class="b-pill">6</span>
+      </article>
+
+      <!-- 7. AI — accent split card filled with generated image, sits beside Technology -->
+      <article class="bcard is-accent is-split b-span2">
+        <div class="b-body-wrap">
+          <div class="b-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+              <g class="b-wire">
+                <path d="M32 8 L48 24 L48 40 L32 56 L16 40 L16 24 Z"/>
+                <circle cx="32" cy="32" r="6"/>
+                <line x1="32" y1="14" x2="32" y2="26"/>
+                <line x1="32" y1="38" x2="32" y2="50"/>
+                <line x1="22" y1="32" x2="26" y2="32"/>
+                <line x1="38" y1="32" x2="42" y2="32"/>
+              </g>
+            </svg>
+          </div>
+          <div class="b-body">
+            <h3>AI.</h3>
+            <p>Apply machine intelligence to accelerate what's already working.</p>
+          </div>
+          <span class="b-pill">7</span>
+        </div>
+        <div class="b-media">
+          <img src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260904_112952_a1d17ff5-04cb-4589-aef3-fac77f225774.png" alt="" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1" onerror="this.style.display='none'">
+        </div>
+      </article>
+
+    </div>
+
+    <p class="method-close">Most companies start with technology or AI. That's the mistake. Skip what comes before them, and you don't eliminate friction. <strong>You multiply it.</strong></p>
+  </div>
+</section>
+
+<!-- ============ SECTION 6 | THE CONTRAST PROTOCOL ============ -->
+<section class="section contrast" id="contrast">
+  <div class="wrap section-inner">
+    <div class="row-head">
+      <span class="eyebrow">The Contrast Protocol</span>
+      <h2>Ask What You're Actually Buying</h2>
+      <p class="lede">Most advisory engagements sell activity. This one sells judgment your team keeps long after the engagement ends.</p>
+    </div>
+
+    <div class="contrast-table">
+      <div class="contrast-head" role="row">
+        <div>Dimension</div>
+        <div>The Usual Approach</div>
+        <div>The Pragmonic Standard</div>
+      </div>
+
+      <div class="contrast-row">
+        <div class="contrast-cell dim">
+          <span class="clabel">Dimension</span>
+          <h4>Where It Starts</h4>
+        </div>
+        <div class="contrast-cell usual">
+          <span class="clabel">The Usual Approach</span>
+          With the technology or the tactic
+        </div>
+        <div class="contrast-cell prag">
+          <span class="clabel">The Pragmonic Standard</span>
+          With the business problem, defined before anything gets recommended
+        </div>
+      </div>
+
+      <div class="contrast-row">
+        <div class="contrast-cell dim">
+          <span class="clabel">Dimension</span>
+          <h4>What Gets Delivered</h4>
+        </div>
+        <div class="contrast-cell usual">
+          <span class="clabel">The Usual Approach</span>
+          A deck. Often 150-plus slides, rarely opened again
+        </div>
+        <div class="contrast-cell prag">
+          <span class="clabel">The Pragmonic Standard</span>
+          Decisions your leadership team can act on this week
+        </div>
+      </div>
+
+      <div class="contrast-row">
+        <div class="contrast-cell dim">
+          <span class="clabel">Dimension</span>
+          <h4>What Happens After</h4>
+        </div>
+        <div class="contrast-cell usual">
+          <span class="clabel">The Usual Approach</span>
+          The expertise leaves when the engagement ends
+        </div>
+        <div class="contrast-cell prag">
+          <span class="clabel">The Pragmonic Standard</span>
+          Capability that stays inside your organization
+        </div>
+      </div>
+
+      <div class="contrast-row">
+        <div class="contrast-cell dim">
+          <span class="clabel">Dimension</span>
+          <h4>How Hard Truths Get Handled</h4>
+        </div>
+        <div class="contrast-cell usual">
+          <span class="clabel">The Usual Approach</span>
+          Share what keeps the retainer in place
+        </div>
+        <div class="contrast-cell prag">
+          <span class="clabel">The Pragmonic Standard</span>
+          Name the real problem even when it changes the scope
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 7 | EXECUTIVE SOLUTIONS PORTFOLIO ============ -->
+<section class="section services" id="services">
+  <div class="wrap section-inner">
+    <div class="row-head">
+      <span class="eyebrow">The Executive Solutions Portfolio</span>
+      <h2>Three Ways In. One Standard.</h2>
+      <p class="lede">Pick the entry point that matches where the friction actually is.</p>
+    </div>
+    <div class="svc-grid">
+      <article class="svc">
+        <div class="svc-thumb"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260904_112536_b5fe16e4-cd3f-453d-b543-4dd7c7bb87b7.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="svc-body">
+          <span class="svc-num">01 &nbsp;/&nbsp; Diagnostic</span>
+          <h3>AI Readiness Lightning Scan™</h3>
+          <div class="svc-row">
+            <span>For</span>
+            <p>Teams under pressure to adopt AI who want an honest read before spending capital.</p>
+          </div>
+          <div class="svc-row">
+            <span>Resolves</span>
+            <p>Whether your workflows can structurally support automation, or whether that's not the real problem.</p>
+          </div>
+          <div class="svc-row outcome">
+            <span>Within a week</span>
+            <p>A clear yes, no, or not-yet on AI, backed by evidence.</p>
+          </div>
+        </div>
+      </article>
+      <article class="svc">
+        <div class="svc-thumb"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260904_112536_df6400c3-ae8f-4638-a04a-901edd7b4c6b.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="svc-body">
+          <span class="svc-num">02 &nbsp;/&nbsp; Diagnostic</span>
+          <h3>Clarity Score™ Business Diagnostic</h3>
+          <div class="svc-row">
+            <span>For</span>
+            <p>Companies with stalled growth or an unclear bottleneck.</p>
+          </div>
+          <div class="svc-row">
+            <span>Resolves</span>
+            <p>Exactly where performance is choked, built from direct conversations with your leadership team, not a survey template.</p>
+          </div>
+          <div class="svc-row outcome">
+            <span>Within a week</span>
+            <p>A prioritized map of what's actually limiting growth.</p>
+          </div>
+        </div>
+      </article>
+      <article class="svc">
+        <div class="svc-thumb"><img src="https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260904_112536_57aceb08-a31b-4804-89da-1ee2379b114d.png" alt="" loading="lazy" onerror="this.style.display='none'"></div>
+        <div class="svc-body">
+          <span class="svc-num">03 &nbsp;/&nbsp; Ongoing</span>
+          <h3>Fractional Growth &amp; Executive Leadership</h3>
+          <div class="svc-row">
+            <span>For</span>
+            <p>Growing companies that need senior commercial growth leadership without a full-time hire.</p>
+          </div>
+          <div class="svc-row">
+            <span>Resolves</span>
+            <p>Strategy, brand, demand generation, and execution finally pulling in the same direction.</p>
+          </div>
+          <div class="svc-row outcome">
+            <span>Outcome</span>
+            <p>A hands-on executive working inside your team, not observing from outside it.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 8 | PEER VALIDATION DOSSIER ============ -->
+<section class="section tslider-section">
+  <div class="tslider-bg" aria-hidden="true" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260904_100931_0d197698-8b48-4389-afc3-27faf5481958.png')"></div>
+  <div class="tslider-scrim" aria-hidden="true"></div>
+  <div class="wrap section-inner">
+    <div class="row-head">
+      <span class="eyebrow">The Peer Validation Dossier</span>
+      <h2>What It's Like to Work Inside Her Process</h2>
+      <p class="lede">In their own words.</p>
+    </div>
+    <div class="tslider" id="tslider">
+      <div class="tslider-viewport">
+        <div class="tslider-track">
+          <figure class="tslide">
+            <div class="tslide-head">
+              <span class="tavatar" aria-hidden="true">DT</span>
+              <figcaption>David Tseng <span>Director of Business Intelligence, TissueTech</span></figcaption>
+            </div>
+            <blockquote>Juli is process-oriented, data driven, and facilitates great thinking to bring out the best in the people around her... Her experience in marketing in many different industries makes her a versatile fit anywhere.</blockquote>
+          </figure>
+          <figure class="tslide">
+            <div class="tslide-head">
+              <span class="tavatar" aria-hidden="true">DW</span>
+              <figcaption>Dawn West <span>Administrative Assistant, 5.5-year direct report</span></figcaption>
+            </div>
+            <blockquote>She envisions the big picture with the ability to roll up her sleeves and dive into the details. Her pursuit of excellence is unmatched... She can always be counted on to leave no stone unturned.</blockquote>
+          </figure>
+          <figure class="tslide">
+            <div class="tslide-head">
+              <span class="tavatar" aria-hidden="true">MR</span>
+              <figcaption>Monty Rains <span>Founder &amp; Executive Producer at IMMERSIFY</span></figcaption>
+            </div>
+            <blockquote>Juli is a bright, can-do executive with keen strategic insight and valuable operating skills. Her ability to cut through the clutter to identify salient drivers of success is impressive.</blockquote>
+          </figure>
+          <figure class="tslide">
+            <div class="tslide-head">
+              <span class="tavatar" aria-hidden="true">IH</span>
+              <figcaption>Irene Hayes <span>Change Management Consultant, former Big 4 Accounting Communications Executive</span></figcaption>
+            </div>
+            <blockquote>She had only been on the job two weeks, and she had already completed a detailed analysis of what needed to be done along with a strategic plan that was striking in its depth and reach... Creative strategic planning coupled with strong execution.</blockquote>
+          </figure>
+        </div>
+      </div>
+      <div class="tslider-nav">
+        <button class="tarrow" data-dir="-1" aria-label="Previous testimonial">←</button>
+        <div class="tdots" role="tablist"></div>
+        <button class="tarrow" data-dir="1" aria-label="Next testimonial">→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 9 | THE REVERSE INTERVIEW ============ -->
+<section class="section reverse" id="questions-fit">
+  <div class="wrap section-inner">
+    <div class="row-head">
+      <span class="eyebrow">The Reverse Interview (Qualification)</span>
+      <h2>Before We Talk, Ask Yourself These</h2>
+      <p class="lede">Juli works with a small number of clients a year, by design. Before you reach out, here's how she thinks about fit. The kinds of questions that matter in a first conversation.</p>
+    </div>
+    <div class="reverse-list">
+      <div class="rev-item">
+        <div class="rev-num">01</div>
+        <div class="rev-q">Are we navigating a real shift, or reacting to pressure to look busy?</div>
+      </div>
+      <div class="rev-item">
+        <div class="rev-num">02</div>
+        <div class="rev-q">Do we want a partner who tells us the truth, even if it costs the engagement?</div>
+      </div>
+      <div class="rev-item">
+        <div class="rev-num">03</div>
+        <div class="rev-q">Are we building something our team can run without us in the room?</div>
+      </div>
+    </div>
+    <div class="reverse-close">
+      <p><strong>If you're looking for a quick technology fix or a template with your logo on it, this isn't the right call to make.</strong></p>
+      <p>If you answered honestly and you're still reading, it probably is.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 10 | THE HONEST ANSWERS ============ -->
+<section class="section" id="questions">
+  <div class="wrap section-inner">
+    <div class="row-head">
+      <span class="eyebrow">The Honest Answers</span>
+      <h2>The Honest Answers</h2>
+      <p class="lede">Three things every executive asks before the first call. Here's what we'd tell you, unscripted.</p>
+    </div>
+    <div class="card-grid faq-cards">
+      <div class="card">
+        <div class="faq-icon" aria-hidden="true">
+          <svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+            <g class="faq-wire">
+              <circle cx="16" cy="16" r="6"/>
+              <path d="M16 6 L16 9 M16 23 L16 26 M6 16 L9 16 M23 16 L26 16 M9 9 L11 11 M21 21 L23 23 M23 9 L21 11 M11 21 L9 23"/>
+              <circle cx="30" cy="30" r="5"/>
+              <path d="M30 22 L30 24.5 M30 35.5 L30 38 M22 30 L24.5 30 M35.5 30 L38 30"/>
+            </g>
+          </svg>
+        </div>
+        <span class="card-tag">Operations</span>
+        <h3><q>What if our internal processes are honestly a mess?</q></h3>
+        <p>Expect that. Most successful, fast-growing companies have a knowledge mess somewhere. We're not here to judge your operational history. We're here to find out where your infrastructure needs reinforcement, and install what's missing.</p>
+      </div>
+      <div class="card">
+        <div class="faq-icon" aria-hidden="true">
+          <svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+            <g class="faq-wire">
+              <path d="M22 6 L33 12 L33 24 L22 30 L11 24 L11 12 Z"/>
+              <circle cx="22" cy="18" r="4.5"/>
+              <path d="M22 9 L22 13.5 M22 22.5 L22 27 M14 18 L18.5 18 M25.5 18 L30 18"/>
+              <path d="M16 34 L22 34 L22 30 M28 34 L22 34"/>
+            </g>
+          </svg>
+        </div>
+        <span class="card-tag">Tooling</span>
+        <h3><q>What if we're already using AI?</q></h3>
+        <p>Good. The question isn't whether you're using AI. It's whether you're using it in the places that matter. We'll look at what's working, what's fragmented, and where greater leverage may be hiding. Because AI doesn't operate in isolation. Your business context matters.</p>
+      </div>
+      <div class="card">
+        <div class="faq-icon" aria-hidden="true">
+          <svg viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+            <g class="faq-wire">
+              <circle cx="22" cy="23" r="14"/>
+              <path d="M22 15 L22 23 L28 27"/>
+              <path d="M14 6 L18 9 M30 6 L26 9"/>
+            </g>
+          </svg>
+        </div>
+        <span class="card-tag">Timing</span>
+        <h3><q>Why act on this now instead of next quarter?</q></h3>
+        <p>The noise doesn't pause for your timeline. Every quarter you wait, low-value activity keeps controlling your team's attention, and competitors who moved first keep compounding their advantage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 11 | THE OPERATOR'S PEDIGREE (FOUNDER STORY) ============ -->
+<section class="section founder" id="founder">
+  <div class="wrap section-inner">
+    <div class="about-head">
+      <span class="eyebrow">The Operator's Pedigree</span>
+      <h2>In the Room Where the Real Problem Surfaces</h2>
+      <p class="about-lede">Not the problem on the slide. The one underneath it.</p>
+    </div>
+    <div class="founder-cols">
+      <figure class="founder-portrait">
+        <img src="https://dashboard.katalyst-crm.com/files/t1/8fa7d84f-591c-4a23-b8db-7df8e9b4a06e.webp" alt="Juli Bark, Founder of Pragmonic" loading="lazy">
+        <figcaption class="founder-portrait-meta">
+          <strong>Juli Bark</strong>
+          <span>Founder, Pragmonic</span>
+          <span>CMO &amp; CSO, Chief Outsiders</span>
+        </figcaption>
+      </figure>
+      <div class="story-body">
+        <p>Juli Bark has spent her career walking into complicated businesses at moments when something needed to change. Growth had stalled, a market was shifting, an acquisition needed integrating, a new offering needed commercializing, or the old way of working simply wasn't working anymore.</p>
+        <p>What she learned was simple: <strong>the problem you're handed isn't always the problem you need to solve.</strong></p>
+        <p>The numbers matter. So do the processes, the people, the customer, and what is actually happening inside the business. Technology can create extraordinary leverage, but only after you understand what you're asking it to improve.</p>
+        <p>That belief became even more relevant with AI. Its power changed the possibilities. It didn't change the sequence.</p>
+        <p>Pragmonic grew from that idea: understand the business first. Then decide where technology, and now AI, can make it better.</p>
+        <div class="story-pull">
+          "Great organizations are not defined by the number of technologies they adopt. They are defined by the quality of the decisions they make."
+          <span class="attribution">— Juli Bark, Founder, Pragmonic</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECTION 12 | THE DIAGNOSTIC CONSULTATION CATALYST ============ -->
+<section class="closing" id="contact">
+  <div class="closing-bg" aria-hidden="true">
+    <div class="hero-glow hero-glow-1"></div>
+    <div class="hero-glow hero-glow-2"></div>
+    <div class="closing-photo" style="background-image:url('https://d8j0ntlcm91z4.cloudfront.net/user_35NBuSfIPglHIOMZxxqoxDRFcyj/hf_20260904_100817_a4249f70-b2ed-4255-8c9d-3b0780bf2ce1.png')"></div>
+  </div>
+  <div class="closing-scrim" aria-hidden="true"></div>
+  <div class="wrap section-inner">
+    <span class="eyebrow eyebrow-ondark">The Diagnostic Consultation Catalyst</span>
+    <h2>Pick Your First Move</h2>
+    <p class="closing-lede">Both paths start with listening, not a proposal.</p>
+
+    <div class="closing-paths">
+      <article class="cpath">
+        <h3>Request an Executive Diagnostic Briefing</h3>
+        <p>A direct, 30-minute conversation to get an honest read on your business. No pitch. No pressure. Just clarity on what may be getting in your way.</p>
+        <a class="btn btn-primary" href="mailto:hello@pragmonic.com?subject=Executive%20Diagnostic%20Briefing">Schedule the Briefing</a>
+      </article>
+      <article class="cpath">
+        <h3>Request an AI Readiness Lightning Scan™</h3>
+        <p>A focused, evidence-based read on where AI can create meaningful leverage, where it may create risk, and whether something else needs fixing first.</p>
+        <a class="btn btn-primary" href="mailto:hello@pragmonic.com?subject=AI%20Readiness%20Lightning%20Scan">Request the Scan</a>
+      </article>
+    </div>
+
+    <p class="closing-tag">Because lasting growth isn't built by chance. It's built by design.™</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap foot-grid">
+    <div class="foot-col foot-brand">
+      <a class="logo" href="#top">
+        <img class="logo-img" src="https://dashboard.katalyst-crm.com/files/t1/logojuli.png" alt="Pragmonic">
+      </a>
+      <p class="tagline">Because lasting growth isn't built by chance. It's built by design.™</p>
+    </div>
+    <div class="foot-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:hello@pragmonic.com">hello@pragmonic.com</a></li>
+        <li><a href="#contact">Request a Briefing</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Site Map</h4>
+      <ul>
+        <li><a href="#top">Home</a></li>
+        <li><a href="#method">The Method</a></li>
+        <li><a href="#services">Solutions</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a href="#founder">Founder</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4>Follow</h4>
+      <ul>
+        <li><a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>© 2026 Pragmonic. All rights reserved.</span>
+    <a href="#">Privacy Policy</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('hamburger');
+  var menu = document.getElementById('mobileMenu');
+  var mq = window.matchMedia('(min-width: 1024px)');
+
+  function setOpen(open){
+    menu.classList.toggle('open', open);
+    btn.classList.toggle('is-open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.classList.toggle('menu-locked', open);
+  }
+
+  btn.addEventListener('click', function(){
+    setOpen(!menu.classList.contains('open'));
+  });
+  menu.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ setOpen(false); });
+  });
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') setOpen(false);
+  });
+  document.addEventListener('click', function(e){
+    if(menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)){
+      setOpen(false);
+    }
+  });
+  function onMQ(e){ if(e.matches) setOpen(false); }
+  if(mq.addEventListener){ mq.addEventListener('change', onMQ); } else { mq.addListener(onMQ); }
+
+  /* ---- Testimonials slider ---- */
+  var slider = document.getElementById('tslider');
+  if(slider){
+    var track = slider.querySelector('.tslider-track');
+    var slides = [].slice.call(track.children);
+    var dotsWrap = slider.querySelector('.tdots');
+    var idx = 0, timer = null;
+    var reduceT = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    slides.forEach(function(_, i){
+      var d = document.createElement('button');
+      d.className = 'tdot';
+      d.setAttribute('role','tab');
+      d.setAttribute('aria-label','Testimonial ' + (i+1));
+      d.addEventListener('click', function(){ go(i, true); });
+      dotsWrap.appendChild(d);
+    });
+    var dots = [].slice.call(dotsWrap.children);
+
+    function go(i, user){
+      idx = (i + slides.length) % slides.length;
+      track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+      dots.forEach(function(d, k){ d.setAttribute('aria-selected', String(k === idx)); });
+      if(user) restart();
+    }
+    function next(){ go(idx + 1); }
+    function restart(){
+      if(timer) clearInterval(timer);
+      if(!reduceT) timer = setInterval(next, 7500);
+    }
+
+    slider.querySelectorAll('.tarrow').forEach(function(b){
+      b.addEventListener('click', function(){ go(idx + parseInt(b.dataset.dir,10), true); });
+    });
+    slider.addEventListener('mouseenter', function(){ if(timer) clearInterval(timer); });
+    slider.addEventListener('mouseleave', restart);
+
+    /* touch swipe */
+    var x0 = null;
+    slider.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; }, {passive:true});
+    slider.addEventListener('touchend', function(e){
+      if(x0 === null) return;
+      var dx = e.changedTouches[0].clientX - x0;
+      if(Math.abs(dx) > 40) go(idx + (dx < 0 ? 1 : -1), true);
+      x0 = null;
+    }, {passive:true});
+
+    go(0);
+    restart();
+  }
+})();
+</script>
+</body>
+</html>
