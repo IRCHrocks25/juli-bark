@@ -735,6 +735,10 @@ footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.1);color:#f
 }
 
 /* ============ SMALL-SCREEN REFINEMENTS ============ */
+@media (max-width:767px){
+  .hero{min-height:0}
+  .hero-grid{padding-block:calc(var(--header-h,118px) + 2rem) 3rem}
+}
 @media (max-width:600px){
   .bcard{min-height:0}
   .hero .btn-hero,.hero .btn-hero-outline,.closing .btn{width:100%}
